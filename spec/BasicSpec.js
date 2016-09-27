@@ -944,6 +944,19 @@ describe('HtmlWebpackPlugin', function () {
         });
       }
     };
+    var thirdExamplePlugin = {
+      apply: function (compiler) {
+        compiler.plugin('compilation', function (compilation) {
+          compilation.plugin('html-webpack-plugin-after-html-processing', function (object, callback) {
+            eventFiredForFirstPlugin = true;
+            var result = extend(object, {
+              html: object.html + ' Injected by third plugin'
+            });
+            callback(null, result);
+          });
+        });
+      }
+    };
 
     testHtmlPlugin({
       entry: {
@@ -956,9 +969,10 @@ describe('HtmlWebpackPlugin', function () {
       plugins: [
         new HtmlWebpackPlugin(),
         examplePlugin,
-        secondExamplePlugin
+        secondExamplePlugin,
+        thirdExamplePlugin
       ]
-    }, ['Injected by first plugin Injected by second plugin'], null, function () {
+    }, ['Injected by first plugin Injected by second plugin Injected by third plugin'], null, function () {
       expect(eventFiredForFirstPlugin).toBe(true);
       expect(eventFiredForSecondPlugin).toBe(true);
       done();
