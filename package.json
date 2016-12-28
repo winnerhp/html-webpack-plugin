@@ -1,6 +1,6 @@
 {
-  "name": "html-webpack-plugin",
-  "version": "2.24.1",
+  "name": "html-webpack-plugin-random",
+  "version": "2.24.2",
   "description": "Simplifies creation of HTML files to serve your webpack bundles",
   "main": "index.js",
   "files": [

@@ -396,6 +396,9 @@ HtmlWebpackPlugin.prototype.htmlWebpackPluginAssets = function (compilation, chu
     publicPath += '/';
   }
 
+  var randomPublicPath = publicPath.split(',');
+  publicPath = randomPublicPath[0];
+
   var assets = {
     // The public path
     publicPath: publicPath,
@@ -425,7 +428,8 @@ HtmlWebpackPlugin.prototype.htmlWebpackPluginAssets = function (compilation, chu
 
     // Prepend the public path to all chunk files
     var chunkFiles = [].concat(chunk.files).map(function (chunkFile) {
-      return publicPath + chunkFile;
+      var temppublic =  randomPublicPath[parseInt(Math.random()*3)];
+      return temppublic + chunkFile;
     });
 
     // Append a hash for cache busting
