@@ -428,7 +428,9 @@ HtmlWebpackPlugin.prototype.htmlWebpackPluginAssets = function (compilation, chu
 
     // Prepend the public path to all chunk files
     var chunkFiles = [].concat(chunk.files).map(function (chunkFile) {
-      var temppublic =  randomPublicPath[parseInt(Math.random()*3)];
+      var temppublic = randomPublicPath.length < 2
+        ? randomPublicPath[0]
+        : randomPublicPath[parseInt(Math.random()*randomPublicPath.length)];
       return temppublic + chunkFile;
     });
 
